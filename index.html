@@ -1,0 +1,266 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+		        <script src="https://www.gstatic.com/firebasejs/8.6.2/firebase-app.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/8.6.2/firebase-firestore.js"></script>
+
+<title>Bruxelles order</title>
+
+	<style>
+		body {
+			font-size: 4vw;
+		}
+		img {
+			width: 90vw;
+			height: 50vw;
+			object-fit: cover;
+			display: block;
+			margin: 0 auto;
+		}
+		
+		form{
+			display: flex;
+			flex-wrap: wrap;
+			margin: 10vw auto;
+		}
+		
+		label{
+			width:40vw;
+			margin: 0vw auto;
+
+		}
+		input{
+			width:40vw;
+			height: 8vw;
+			margin: 1vw auto 5vw auto;
+			border-radius: 7px;
+			outline:none;
+			border: 0;
+			box-shadow: 1vw 1vw 2vw 0.01vw #999;
+		}
+		
+		button{
+			width:50vw;
+			height: 10vw;
+			margin: 5vw auto 1vw auto;
+						border-radius: 7px;
+			color: #FEF9F1;
+			background: #A07620;
+			outline:none;
+			border: 0;
+			box-shadow: 1vw 1vw 2vw 0.01vw #999;
+
+
+		}
+		#order1{
+			width:70vw;
+		}
+		#order{
+			width:70vw;
+		}
+		
+		#description{
+			width:70vw;
+			border-radius: 7px;
+
+		}
+		#description1{
+			width:70vw;
+			
+		}
+
+		
+		textarea {
+				width:40vw;
+				height:20vw;
+				margin: 0 auto;
+		}
+	
+@media (max-width: 414px) {
+}
+
+@media (max-width: 768px) {
+}
+
+@media (max-width: 1200px) {
+}
+	
+@media (min-width: 415px) {
+}
+
+@media (min-width: 769px) {
+			body {
+			font-size: 2vw;
+		}
+		img {
+			width: 90vw;
+			height: 25vw;
+		}
+		
+		form{
+			width: 70vw;
+			margin: 5vw auto;
+		}
+		
+		label{
+			width:30vw;
+			margin: 0vw auto;
+
+		}
+		input{
+			font-size: 2vw;
+			width:30vw;
+			height: 3vw;
+			margin: 1vw auto 5vw auto;
+			border-radius: 7px;
+		}
+		
+		button{
+			font-size: 2vw;
+			width:50vw;
+			height: 5vw;
+			margin: 5vw auto 1vw auto;
+		}
+
+	
+	#order1{
+			width:60vw;
+		}
+		#order{
+			width:60vw;
+		}
+		
+		#description{
+			width:60vw;
+			border-radius: 7px;
+
+		}
+		#description1{
+			width:60vw;
+			
+		}
+
+		
+		textarea {
+				width:40vw;
+				height:20vw;
+				margin: 0 auto;
+		}
+
+}
+
+@media (min-width: 1201px) {
+}
+	
+	</style>
+</head>
+
+<body>
+	
+	<img src="291629217_453851623413932_6074956284834990941_n.jpg" alt="">
+	<form id="add-cafe-form" action="">
+  <label for="Seller">Seller
+  <input list="browsers" name="browser" id="browser">
+  <datalist id="browsers">
+    <option value="Jack"></option>
+    <option value="Izla"></option>
+  </datalist></label>
+		<br>
+		  <label for="code">Code
+  <input type="password" id="code" name="code" value=""></label><br>
+
+  <label for="name">Costumer name
+  <input type="text" id="name" name="name" value=""></label><br>
+						  <label for="date">Deadline
+  <input type="date" id="date" name="date" value=""></label><br>
+
+				  <label id="order1" for="order1">Order <br>
+  <input type="text" id="order" name="order" value=""></label><br>
+				  <label id="description1"  for="description1">Description
+  <textarea id="description" name="description"></textarea></label>
+		<button>Confirm</button>
+	
+	
+	</form>
+	
+	
+<script>
+
+const firebaseConfig = {
+  apiKey: "AIzaSyBiGQWCKHvhYthDl1o2mhmbz2-fDZiLLzQ",
+  authDomain: "brussel-800ea.firebaseapp.com",
+  projectId: "brussel-800ea",
+  storageBucket: "brussel-800ea.appspot.com",
+  messagingSenderId: "1056147798778",
+  appId: "1:1056147798778:web:2b451ed24b19c428316743"
+};
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+	
+	var db = firebase.firestore();
+   db.settings({ timestampsInSnapshots: true }); 
+
+
+</script>	
+			<script>
+				/*
+				db.collection("orders").add({
+    first: "Ada",
+    last: "Lovelace",
+    born: 1815
+})
+.then((docRef) => {
+    console.log("Document written with ID: ", docRef.id);
+})
+.catch((error) => {
+    console.error("Error adding document: ", error);
+});
+
+				*/
+								const form = document.querySelector('#add-cafe-form');
+						var test=false;
+				
+				
+
+				form.addEventListener('submit', (e) => {
+if (form.browser.value=="Jack" && form.code.value=="111"){    
+test=true;
+} else if (form.browser.value=="Izla"&& form.code.value=="222") {
+test=true;
+
+} else {alert("Seller or Code is wrong");					
+		e.preventDefault();}
+					
+		if (test) {		
+					e.preventDefault();
+
+				    db.collection('orders').add({
+        seller: form.browser.value,
+        name: form.name.value,
+		date: form.date.value,
+        order: form.order.value,
+        description: form.description.value
+
+    });
+					    form.browser.value = '';
+    form.name.value = '';
+			    form.code.value = '';
+
+    form.date.value = '';
+    form.order.value = '';
+    form.description.value = '';
+document.querySelector("body").style.background="#0f0"
+setTimeout(()=>{document.querySelector("body").style.background="#fff"}, 300 )
+
+}
+				});
+
+
+	
+	</script>
+
+
+</body>
+	
+</html>
