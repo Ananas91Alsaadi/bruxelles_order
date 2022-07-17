@@ -60,7 +60,11 @@
 			border: 0;
 			box-shadow: 1vw 1vw 2vw 0.01vw #999;
 		}
-		
+				button:active{
+		background: #FED497;
+	
+	}
+
 		#order1{
 			width:70vw;
 		}
@@ -256,7 +260,8 @@ test=true;
         name: form.name.value,
 		date: form.date.value,
         order: form.order.value,
-        description: form.description.value
+        description: form.description.value,
+		notDone: true
 
     });
 					    form.browsers.value = '';
@@ -266,7 +271,7 @@ test=true;
     form.date.value = '';
     form.order.value = '';
     form.description.value = '';
-document.querySelector("body").style.background="#0f0";
+document.querySelector("body").style.background="#0BCE2B";
 setTimeout(()=>{document.querySelector("body").style.background="#fff"}, 300 );
 test=false;
 
